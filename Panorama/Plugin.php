@@ -131,6 +131,13 @@ class Panorama_Plugin implements Typecho_Plugin_Interface
   public static function parse($content, $widget, $lastResult)
   {
     $content = empty($lastResult) ? $content : $lastResult;
+    // 从文件头部注释中动态提取版本号
+    $fileContent = file_get_contents(__FILE__);
+    if (preg_match('/\*\s*@version\s+([\d\.]+)/', $fileContent, $matches)) {
+        $version = $matches[1];
+    } else {
+        $version = '1.0.0'; // 默认版本号作为后备
+    }
 
     // 匹配全景图短代码
     if (preg_match_all('/\[panorama\s+([^\]]*)\]/i', $content, $matches)) {
@@ -171,6 +178,7 @@ class Panorama_Plugin implements Typecho_Plugin_Interface
 
         $replacement .= '<script>
 document.addEventListener("DOMContentLoaded", function() {
+  console.info("%cPanorama v' . $version . ' %c https://wangdaodao.com/ ", "color: #013821; background: #43bb88; padding:5px; font-size: 12px; font-weight: bold;","color: #fadfa3; background: #030307; padding:5px; font-size: 12px; font-weight: bold;");
   pannellum.viewer("' . $panoramaId . '", {';
 
         if ($type === 'cubemap') {
