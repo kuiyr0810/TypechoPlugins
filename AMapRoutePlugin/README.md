@@ -220,22 +220,6 @@
 - 支持驾车、步行、骑行三种路径类型
 - 提供可视化编辑器和短代码两种使用方式
 
-## 许可证
+## 作者
 
-本插件采用 MIT 许可证，详情请参阅 LICENSE 文件。
-
-## 支持
-
-如有问题或建议，请通过以下方式联系：
-
-- 提交 Issue：[GitHub Issues](https://github.com/yourusername/typecho-plugins/issues)
-- 邮箱：your.email@example.com
-
-## 贡献
-
-欢迎提交 Pull Request 来改进这个插件。在提交之前，请确保：
-
-1. 代码符合插件的编码规范
-2. 添加了必要的注释
-3. 测试了功能是否正常工作
-4. 更新了相关文档
+王叨叨 - https://wangdaodao.com/
