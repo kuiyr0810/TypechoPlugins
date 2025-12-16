@@ -1,0 +1,67 @@
+/*
+ * FlowChart 插件样式
+ * 支持自动主题切换 (prefers-color-scheme)
+ * 基于 CSS 自定义属性实现
+ */
+
+/* ===== 流程图颜色变量定义 ===== */
+:root {
+  /* 流程图浅色主题 (默认) */
+  --flowchart-bg: #fff;
+  --flowchart-stroke: #000;
+  --flowchart-text: #000;
+  --flowchart-path: #000;
+}
+
+/* 深色主题 - 系统偏好 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --flowchart-bg: #333;
+    --flowchart-stroke: #fff;
+    --flowchart-text: #fff;
+    --flowchart-path: #fff;
+  }
+}
+
+/* ===== 手动主题切换 - 优先级高于媒体查询 ===== */
+
+/* 手动浅色主题 */
+[data-theme='light'] {
+  --flowchart-bg: #fff;
+  --flowchart-stroke: #000;
+  --flowchart-text: #000;
+  --flowchart-path: #000;
+}
+
+/* 手动深色主题 */
+[data-theme='dark'] {
+  --flowchart-bg: #333;
+  --flowchart-stroke: #fff;
+  --flowchart-text: #fff;
+  --flowchart-path: #fff;
+}
+
+.flow-chart {
+  width: 100%;
+  overflow: auto;
+}
+/* 流程图元素样式 */
+.flow-chart .flowchart {
+  fill: var(--flowchart-bg);
+  stroke: var(--flowchart-stroke);
+}
+
+.flow-chart .flowchartt {
+  fill: var(--flowchart-text);
+}
+.flow-chart text {
+  fill: var(--flowchart-text);
+}
+
+.flow-chart path:not(.flowchart) {
+  stroke: var(--flowchart-path);
+}
+.flow-chart rect:not(.flowchart) {
+  fill: var(--flowchart-bg);
+  stroke: var(--flowchart-stroke);
+}
