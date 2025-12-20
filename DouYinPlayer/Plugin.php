@@ -116,7 +116,7 @@ class DouYinPlayer_Plugin implements Typecho_Plugin_Interface
             $videoId = $matches[1];
             
             // 生成iframe代码
-            $iframe = '<p style="display: flex;justify-content: center;"><iframe width="' . $width . '" height="' . $height . '" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" src="https://open.douyin.com/player/video?vid=' . $videoId . '&autoplay=0" referrerpolicy="unsafe-url"></iframe></p>';
+            $iframe = '<p class="typecho-douyin-video-wrapper"><iframe width="' . $width . '" height="' . $height . '" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" src="https://open.douyin.com/player/video?vid=' . $videoId . '&autoplay=0" referrerpolicy="unsafe-url"></iframe></p>';
             
             return $iframe;
         }, $content);
