@@ -24,6 +24,7 @@ class DouYinPlayer_Plugin implements Typecho_Plugin_Interface
     {
         Typecho_Plugin::factory('Widget_Abstract_Contents')->contentEx = array('DouYinPlayer_Plugin', 'replacePlayer');
         Typecho_Plugin::factory('Widget_Abstract_Contents')->excerptEx = array('DouYinPlayer_Plugin', 'replacePlayer');
+        Typecho_Plugin::factory('Widget_Archive')->header = array('DouYinPlayer_Plugin', 'header');
         return _t('插件已激活，将在内容渲染时替换抖音视频链接为播放器');
     }
 
@@ -83,6 +84,19 @@ class DouYinPlayer_Plugin implements Typecho_Plugin_Interface
     }
 
     /**
+     * 在页面头部添加CSS文件
+     *
+     * @access public
+     * @return void
+     */
+    public static function header()
+    {
+        // 获取插件URL
+        $pluginUrl = Helper::options()->pluginUrl . '/DouYinPlayer/assets/style.css';
+        echo '<link rel="stylesheet" type="text/css" href="' . $pluginUrl . '" />';
+    }
+
+    /**
      * 替换抖音视频链接为播放器
      *
      * @access public
@@ -94,7 +108,7 @@ class DouYinPlayer_Plugin implements Typecho_Plugin_Interface
     public static function replacePlayer($content, $widget, $lastResult)
     {
         $content = empty($lastResult) ? $content : $lastResult;
-        
+
         // 获取插件配置
         $options = Helper::options();
         $config = $options->plugin('DouYinPlayer');
@@ -114,10 +128,10 @@ class DouYinPlayer_Plugin implements Typecho_Plugin_Interface
         $content = preg_replace_callback($pattern, function($matches) use ($width, $height) {
             // 获取视频ID
             $videoId = $matches[1];
-            
+
             // 生成iframe代码
             $iframe = '<p class="typecho-douyin-video-wrapper"><iframe width="' . $width . '" height="' . $height . '" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" src="https://open.douyin.com/player/video?vid=' . $videoId . '&autoplay=0" referrerpolicy="unsafe-url"></iframe></p>';
-            
+
             return $iframe;
         }, $content);
 

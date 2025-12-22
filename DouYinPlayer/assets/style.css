@@ -1,0 +1,61 @@
+/* 抖音视频容器基础样式 */
+.typecho-douyin-video-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  margin: 20px auto;
+  padding: 0;
+  background: #000;
+  color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: none;
+  min-height: 0;
+}
+
+/* 响应式高度设置 - 桌面端 */
+@media (min-width: 730px) {
+  .typecho-douyin-video-wrapper {
+    width: min(730px, 100%);
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* 响应式高度设置 - 移动端 */
+@media (max-width: 729px) {
+  .typecho-douyin-video-wrapper {
+    width: min(324px, 100%);
+    aspect-ratio: 9 / 16;
+  }
+}
+
+/* 响应式高度设置 - 小屏幕 */
+@media (max-width: 320px) {
+  .typecho-douyin-video-wrapper {
+    width: 100%;
+    padding: 0;
+  }
+}
+
+/* iframe样式 */
+.typecho-douyin-video-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  border: none;
+  border-radius: 8px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  align-self: flex-start;
+  z-index: 2;
+  transition: height 0.3s ease;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
