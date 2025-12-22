@@ -1,5 +1,12 @@
 /* 抖音视频容器基础样式 */
+.typecho-douyin-video {
+  container-type: inline-size; /* 在父容器上定义容器类型 */
+  container-name: douyin-video; /* 可选，为容器命名 */
+  width: 100%; /* 确保父容器有宽度 */
+}
+
 .typecho-douyin-video-wrapper {
+  container-type: inline-size;
   position: relative;
   display: flex;
   align-items: center;
@@ -18,27 +25,19 @@
   min-height: 0;
 }
 
-/* 响应式高度设置 - 桌面端 */
-@media (min-width: 730px) {
+/* 容器查询 - 当父容器.douyin-video的宽度大于等于730px时 */
+@container douyin-video (min-width: 730px) {
   .typecho-douyin-video-wrapper {
     width: min(730px, 100%);
     aspect-ratio: 146 / 89;
   }
 }
 
-/* 响应式高度设置 - 移动端 */
-@media (max-width: 729px) {
+/* 容器查询 - 当父容器.douyin-video的宽度小于730px时 */
+@container douyin-video (max-width: 729px) {
   .typecho-douyin-video-wrapper {
     width: min(324px, 100%);
     aspect-ratio: 27 / 56;
-  }
-}
-
-/* 响应式高度设置 - 小屏幕 */
-@media (max-width: 320px) {
-  .typecho-douyin-video-wrapper {
-    width: 100%;
-    padding: 0;
   }
 }
 
