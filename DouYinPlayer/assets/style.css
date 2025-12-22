@@ -22,7 +22,7 @@
 @media (min-width: 730px) {
   .typecho-douyin-video-wrapper {
     width: min(730px, 100%);
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 146 / 89;
   }
 }
 
@@ -30,7 +30,7 @@
 @media (max-width: 729px) {
   .typecho-douyin-video-wrapper {
     width: min(324px, 100%);
-    aspect-ratio: 9 / 16;
+    aspect-ratio: 27 / 56;
   }
 }
 
