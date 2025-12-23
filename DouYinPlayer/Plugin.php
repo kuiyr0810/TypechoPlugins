@@ -41,6 +41,8 @@ class DouYinPlayer_Plugin implements Typecho_Plugin_Interface
         return _t('插件已禁用，抖音视频链接将恢复为原始链接');
     }
 
+
+
     /**
      * 获取插件配置面板
      *
@@ -48,28 +50,7 @@ class DouYinPlayer_Plugin implements Typecho_Plugin_Interface
      * @param Typecho_Widget_Helper_Form $form 配置面板
      * @return void
      */
-    public static function config(Typecho_Widget_Helper_Form $form)
-    {
-        /** 视频宽度 */
-        $width = new Typecho_Widget_Helper_Form_Element_Text(
-            'width',
-            null,
-            '100%',
-            _t('视频宽度'),
-            _t('设置视频播放器的宽度，例如：100%')
-        );
-        $form->addInput($width);
-
-        /** 视频高度 */
-        $height = new Typecho_Widget_Helper_Form_Element_Text(
-            'height',
-            null,
-            '720px',
-            _t('视频高度'),
-            _t('设置视频播放器的高度，例如：720px')
-        );
-        $form->addInput($height);
-    }
+    public static function config(Typecho_Widget_Helper_Form $form) {}
 
     /**
      * 个人用户的配置面板
@@ -78,10 +59,7 @@ class DouYinPlayer_Plugin implements Typecho_Plugin_Interface
      * @param Typecho_Widget_Helper_Form $form
      * @return void
      */
-    public static function personalConfig(Typecho_Widget_Helper_Form $form)
-    {
-        // 个人用户配置，如果需要的话
-    }
+    public static function personalConfig(Typecho_Widget_Helper_Form $form) {}
 
     /**
      * 在页面头部添加CSS文件
@@ -109,17 +87,9 @@ class DouYinPlayer_Plugin implements Typecho_Plugin_Interface
     {
         $content = empty($lastResult) ? $content : $lastResult;
 
-        // 获取插件配置
-        $options = Helper::options();
-        $config = $options->plugin('DouYinPlayer');
-
-        if (!$config) {
-            return $content;
-        }
-
-        // 获取配置参数
-        $width = $config->width ?: '100%';
-        $height = $config->height ?: '720px';
+        // 使用固定参数
+        $width = '100%';
+        $height = '100%';
 
         // 正则匹配Typecho转换后的a标签格式
         $pattern = '/<a\s+[^>]*href=["\']https:\/\/www\.douyin\.com\/video\/(\d+)["\'][^>]*>.*?<\/a>/i';

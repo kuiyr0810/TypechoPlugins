@@ -6,7 +6,6 @@
 
 - 自动识别Typecho转换后的抖音视频链接
 - 将链接替换为抖音官方播放器
-- 支持自定义播放器尺寸
 - 居中显示视频播放器
 - 仅在渲染时替换，不影响原始内容
 
@@ -15,14 +14,6 @@
 1. 将整个`DouYinPlayer`文件夹上传到Typecho的`usr/plugins/`目录下
 2. 登录Typecho后台，进入"控制台" -> "插件"
 3. 找到"抖音视频播放插件"，点击"启用"
-4. 启用后，在插件设置中配置播放器尺寸
-
-## 配置选项
-
-| 参数用途 | 参数名 | 默认值 | 使用方法 |
-|----------|--------|--------|----------|
-| 视频宽度 | width | 100% | 例如：100%, 800px |
-| 视频高度 | height | 720px | 例如：720px, 500px |
 
 ## 使用方法
 
@@ -39,7 +30,7 @@
 
 2. Typecho会自动将链接转换为`<a>`标签，插件会检测并替换为播放器
 
-3. 播放器将使用您在插件设置中配置的默认尺寸，并居中显示
+3. 播放器将居中显示
 
 ### 示例
 
@@ -55,9 +46,11 @@ Typecho转换后：
 
 插件处理后：
 ```html
-<p style="display: flex;justify-content: center;">
-  <iframe width="100%" height="720px" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" src="https://open.douyin.com/player/video?vid=7554555892894436666&autoplay=0" referrerpolicy="unsafe-url"></iframe>
-</p>
+<div class="typecho-douyin-video">
+  <div class="typecho-douyin-video-wrapper">
+    <iframe width="100%" height="100%" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" src="https://open.douyin.com/player/video?vid=7554555892894436666&autoplay=0" referrerpolicy="unsafe-url"></iframe>
+  </div>
+</div>
 ```
 
 ## 注意事项
@@ -66,13 +59,6 @@ Typecho转换后：
 - 插件仅在渲染时替换链接，不会修改原始文章内容
 - 禁用插件后，视频将恢复为原始链接形式
 - 播放器使用抖音官方嵌入代码，确保最佳兼容性
-
-## 版本历史
-
-### v1.0.0
-- 支持基本的抖音视频链接检测和替换
-- 提供播放器尺寸自定义选项
-- 居中显示播放器
 
 ## 反馈与支持
 
