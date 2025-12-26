@@ -1,0 +1,7 @@
+.typecho-qq-player {
+  border-radius: 2px;
+  box-shadow: 0 0 10px #ccc;
+  margin: 10px;
+  height: 65px;
+  overflow: hidden;
+}
