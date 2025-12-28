@@ -54,6 +54,7 @@ class Mailer_Plugin implements Typecho_Plugin_Interface
         $form->addInput(new Typecho_Widget_Helper_Form_Element_Text('password', NULL, '', _t('密码'), _t('启用身份验证后有效')));
         $form->addInput(new Typecho_Widget_Helper_Form_Element_Text('from', NULL, '', _t('发送人邮箱')));
         $form->addInput(new Typecho_Widget_Helper_Form_Element_Radio('reply', array(1 => '是', 0 => '否'), 0, _t('发送回复'), _t('如果评论人收到回复, 那么给他也发送一封邮件')));
+        $form->addInput(new Typecho_Widget_Helper_Form_Element_Radio('html', array(1 => 'HTML', 0 => '纯文本'), 0, _t('邮件格式'), _t('选择邮件发送格式，HTML格式支持更丰富的样式')));
         $form->addInput(new Typecho_Widget_Helper_Form_Element_Textarea('template', NULL, "你收到了关于文章《{title}》来自 {user} 的评论\n{url}\n\n以下是评论详情:\n\n{text}", _t('邮件正文模版')));
     }
     
@@ -153,6 +154,12 @@ class Mailer_Plugin implements Typecho_Plugin_Interface
         $mail->CharSet = 'utf-8';
         $mail->setFrom($pluginOptions->from, $options->title);
         $mail->Subject = _t('来自文章 %s 的评论', $comment->title);
+        
+        // 设置邮件内容类型
+        if ($pluginOptions->html) {
+            $mail->isHTML(true);
+        }
+        
         $mail->Body = str_replace(array('{user}', '{title}', '{url}', '{text}'),
             array($comment->author, $comment->title, $comment->permalink, $comment->text), $pluginOptions->template);
 
