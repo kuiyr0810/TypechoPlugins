@@ -4,7 +4,7 @@
  *
  * @package MusicPlayer
  * @author  王叨叨
- * @version 1.0.0
+ * @version 1.1.0
  * @link    https://wangdaodao.com
  * @description 将音乐链接自动转换为可嵌入的播放器，支持网易云音乐、QQ音乐、本地音乐
  */
@@ -103,12 +103,12 @@ class MusicPlayer_Plugin implements Typecho_Plugin_Interface
         $auto = isset($options->auto) ? $options->auto : '0';
 
         // 正则匹配Typecho转换后的a标签格式（歌曲）
-        $neteaseSongPattern = '/<a\s+[^>]*href=["\']https:\/\/music\.163\.com\/#\/song\?id=(\d+)["\'][^>]*>.*?<\/a>/i';
+        $neteaseSongPattern = '/<a\s+[^>]*href=["\']https:\/\/music\.163\.com\/#\/song\?id=(\d+)["\'][^>]*>.*?<\/a>|<a\s+[^>]*href=["\']https:\/\/music\.163\.com\/#\/song\/(\d+)["\'][^>]*>.*?<\/a>/i';
 
         // 处理歌曲链接
         $content = preg_replace_callback($neteaseSongPattern, function($matches) use ($auto) {
-            // 获取歌曲ID
-            $songId = $matches[1];
+            // 获取歌曲ID，支持两种格式：?id=数字 和 /song/数字
+            $songId = !empty($matches[1]) ? $matches[1] : $matches[2];
 
             // 生成iframe代码
             $iframe = '<div class="typecho-netease-player"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=100% height=86 src="https://music.163.com/outchain/player?type=2&id=' . $songId . '&auto=' . $auto . '&height=66"></iframe></div>';
@@ -117,12 +117,12 @@ class MusicPlayer_Plugin implements Typecho_Plugin_Interface
         }, $content);
 
         // 正则匹配Typecho转换后的a标签格式（歌单）
-        $neteasePlaylistPattern = '/<a\s+[^>]*href=["\']https:\/\/music\.163\.com\/#\/playlist\?id=(\d+)["\'][^>]*>.*?<\/a>/i';
+        $neteasePlaylistPattern = '/<a\s+[^>]*href=["\']https:\/\/music\.163\.com\/#\/playlist\?id=(\d+)["\'][^>]*>.*?<\/a>|<a\s+[^>]*href=["\']https:\/\/music\.163\.com\/#\/playlist\/(\d+)["\'][^>]*>.*?<\/a>/i';
 
         // 处理歌单链接
         $content = preg_replace_callback($neteasePlaylistPattern, function($matches) use ($auto) {
-            // 获取歌单ID
-            $playlistId = $matches[1];
+            // 获取歌单ID，支持两种格式：?id=数字 和 /playlist/数字
+            $playlistId = !empty($matches[1]) ? $matches[1] : $matches[2];
 
             // 生成iframe代码
             $iframe = '<div class="typecho-netease-player"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=100% height=480 src="https://music.163.com/outchain/player?type=0&id=' . $playlistId . '&auto=' . $auto . '&height=460"></iframe></div>';
@@ -131,15 +131,15 @@ class MusicPlayer_Plugin implements Typecho_Plugin_Interface
         }, $content);
 
         // 正则匹配Typecho转换后的a标签格式（专辑）
-        $neteaseAlbumPattern = '/<a\s+[^>]*href=["\']https:\/\/music\.163\.com\/#\/album\?id=(\d+)["\'][^>]*>.*?<\/a>/i';
+        $neteaseAlbumPattern = '/<a\s+[^>]*href=["\']https:\/\/music\.163\.com\/#\/album\?id=(\d+)["\'][^>]*>.*?<\/a>|<a\s+[^>]*href=["\']https:\/\/music\.163\.com\/#\/album\/(\d+)["\'][^>]*>.*?<\/a>/i';
 
         // 处理专辑链接
         $content = preg_replace_callback($neteaseAlbumPattern, function($matches) use ($auto) {
-            // 获取专辑ID
-            $albumId = $matches[1];
+            // 获取专辑ID，支持两种格式：?id=数字 和 /album/数字
+            $albumId = !empty($matches[1]) ? $matches[1] : $matches[2];
 
             // 生成iframe代码
-            $iframe = '<div class="typecho-netease-player"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=100% height=480 src="https://music.163.com/outchain/player?type=1&id=' . $albumId . '&auto=' . $auto . '&height=460"></iframe></div>';
+            $iframe = '<div class="typecho-netease-player"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=100% height=450 src="https://music.163.com/outchain/player?type=1&id=' . $albumId . '&auto=' . $auto . '&height=430"></iframe></div>';
 
             return $iframe;
         }, $content);
