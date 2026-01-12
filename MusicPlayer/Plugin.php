@@ -139,7 +139,7 @@ class MusicPlayer_Plugin implements Typecho_Plugin_Interface
             $albumId = !empty($matches[1]) ? $matches[1] : $matches[2];
 
             // 生成iframe代码
-            $iframe = '<div class="typecho-netease-player"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=100% height=450 src="https://music.163.com/outchain/player?type=1&id=' . $albumId . '&auto=' . $auto . '&height=430"></iframe></div>';
+            $iframe = '<div class="typecho-netease-player"><iframe sandbox="allow-scripts allow-same-origin allow-forms" frameborder="no" border="0" marginwidth="0" marginheight="0" width=100% height=450 src="https://music.163.com/outchain/player?type=1&id=' . $albumId . '&auto=' . $auto . '&height=430"></iframe></div>';
 
             return $iframe;
         }, $content);
