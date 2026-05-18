@@ -1,13 +1,14 @@
 # Bilibili播放器插件
 
-这是一个Typecho插件，用于将Bilibili默认播放器替换为HTML5移动端播放器，并提供更多自定义选项。
+这是一个Typecho插件，用于使用Bilibili官方播放器，并提供丰富的自定义配置选项。
 
 ## 功能特点
 
-- 将Bilibili默认播放器替换为HTML5移动端播放器
+- 使用Bilibili官方播放器
 - 提供丰富的播放器配置选项
 - 支持自定义播放器尺寸和行为
-- 仅在渲染时替换，不影响原始内容
+- 仅在渲染时修改，不影响原始内容
+- 自动检测并处理Bilibili视频嵌入代码
 
 ## 安装方法
 
@@ -25,6 +26,7 @@
 | 是否自动播放 | autoplay | 0 | 1: 开启, 0: 关闭 |
 | 默认弹幕开关 | danmaku | 1 | 1: 开启, 0: 关闭 |
 | 是否默认静音 | muted | 0 | 1: 开启, 0: 关闭 |
+| 是否展示封面 | poster | 1 | 1: 开启, 0: 关闭 |
 | 一键静音按钮是否显示 | hasMuteButton | 0 | 1: 开启, 0: 关闭 |
 | 视频封面下方信息显示 | hideCoverInfo | 0 | 1: 隐藏, 0: 显示 |
 | 是否隐藏弹幕按钮 | hideDanmakuButton | 0 | 1: 隐藏, 0: 显示 |
@@ -34,7 +36,7 @@
 ## 使用方法
 
 1. 在文章中插入Bilibili视频（使用默认的嵌入代码）
-2. 插件会自动检测并替换播放器
+2. 插件会自动检测并处理播放器参数
 3. 播放器将使用您在插件设置中配置的默认参数
 
 ### 示例
@@ -46,21 +48,23 @@
 
 插件处理后：
 ```html
-<iframe src="//www.bilibili.com/blackboard/html5mobileplayer.html?isOutside=true&aid=114256280356575&bvid=BV1YnZnYAENC&cid=29162276248&p=1&autoplay=0&danmaku=1&muted=0&hasMuteButton=0&hideCoverInfo=0&hideDanmakuButton=0&noFullScreenButton=0&fjw=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="500px"></iframe>
+<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114256280356575&bvid=BV1YnZnYAENC&cid=29162276248&p=1&autoplay=0&danmaku=1&muted=0&poster=1&hasMuteButton=0&hideCoverInfo=0&hideDanmakuButton=0&noFullScreenButton=0&fjw=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="500px"></iframe>
 ```
 
 ## 注意事项
 
-- 插件仅在渲染时替换播放器，不会修改原始文章内容
+- 插件仅在渲染时处理播放器参数，不会修改原始文章内容
 - 禁用插件后，视频将恢复到默认的Bilibili播放器
 - 自动播放功能可能被浏览器阻止，这是浏览器的安全策略
 - 某些参数可能在不同版本的Bilibili播放器中表现不同
+- 插件会保持原始嵌入代码的结构，只修改src参数和尺寸设置
 
 ## 版本历史
 
 ### v1.0.0
-- 支持基本的播放器替换和配置选项
-
+- 支持基本的播放器配置选项
+- 使用Bilibili官方播放器
+- 自动处理嵌入代码参数
 
 ## 反馈与支持
 
